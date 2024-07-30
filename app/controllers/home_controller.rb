@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    logger.debug "Home working"
+    puts "Home working"
   end
 end
