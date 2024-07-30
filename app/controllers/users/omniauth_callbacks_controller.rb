@@ -26,6 +26,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   #   super
   # end
 
+  def failure
+    redirect_to root_path
+  end
+
   # protected
 
   # The path used when OmniAuth fails

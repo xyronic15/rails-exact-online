@@ -11,14 +11,26 @@ module OmniAuth
         token_url: 'https://start.exactonline.nl/api/oauth2/token'
       }
 
-      # TBD the following items
-      # uid { raw_info['id'] }
+      # TBC the following items
+      uid { raw_info['UserID'] }
 
-      # info do {}
+      info do
+        {
+          name: raw_info['FullName'],
+          email: raw_info['Email'],
+          image: raw_info['Avatar']
+        }
+      end
 
-      # extra do {}
+      extra do
+        {
+          raw_info: raw_info
+        }
+      end
 
-      # def raw_info
+      def raw_info
+        @raw_info ||= access_token.get('https://start.exactonline.nl/api/v1/current/Me').parsed
+      end
     end
   end
 end
