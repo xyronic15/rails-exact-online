@@ -2,11 +2,11 @@
     <ul>
         <% if user_signed_in? %>
             <li><%= link_to 'Edit your account', edit_user_registration_path %></li>
-            <li><%= link_to "Connect Exact Online", user_exact_online_omniauth_authorize_path, method: :get, data: { turbo_method: :get }, target: "_blank" %></li>
+            <li><%= button_to "Connect Exact Online", user_exact_online_omniauth_authorize_path, form: {target: '_blank'} %></li>
             <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete,  data: { turbo_method: :delete } %></li>
         <% else %>
             <li><%= link_to 'Sign in', new_user_session_path %></li>
-            <li><%= link_to "Connect Exact Online", user_exact_online_omniauth_authorize_path, method: :post, data: { turbo_method: :post }, target: "_blank" %></li>
+            <li><%= button_to "Connect Exact Online", user_exact_online_omniauth_authorize_path, form: {target: '_blank'} %></li>
             <li><%= link_to 'Sign up', new_user_registration_path %></li>
         <%end %>
     </ul>
