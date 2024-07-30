@@ -8,6 +8,9 @@
 #
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
+
+require 'strategies/exact_online'
+
 Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
@@ -272,7 +275,6 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-  require 'omniauth/strategies/exact_online'
   config.omniauth :exact_online, ENV['EO_CLIENT_ID'], ENV['EO_CLIENT_SECRET'], setup: true, :strategy_class => OmniAuth::Strategies::ExactOnline
 
   # ==> Warden configuration
