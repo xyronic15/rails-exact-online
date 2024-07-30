@@ -71,3 +71,5 @@ gem "devise", "~> 4.9"
 gem "omniauth", "~> 2.1"
 
 gem "omniauth-oauth2", "~> 1.8"
+
+gem "dotenv-rails", "~> 3.1"
