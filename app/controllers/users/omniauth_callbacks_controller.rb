@@ -8,6 +8,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # def twitter
   # end
 
+  def exact_online
+    auth = request.env['omniauth.auth']
+    puts "Auth data: #{auth.to_yaml}"
+  end
+
   # More info at:
   # https://github.com/heartcombo/devise#omniauth
 
