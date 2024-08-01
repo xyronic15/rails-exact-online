@@ -9,8 +9,16 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # end
 
   def exact_online
+    # puts "Session State: #{session['omniauth.state']}"
+    # puts "Params State: #{params[:state]}"
+
+    # if session['omniauth.state'] != params[:state]
+    #   return redirect_to root_path, alert: 'State parameter mismatch'
+    # end
+
     auth = request.env['omniauth.auth']
     puts "Auth data: #{auth.to_yaml}"
+    redirect_to root_path, notice: "Callback successful"
   end
 
   # More info at:
@@ -27,7 +35,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # end
 
   def failure
-    redirect_to root_path
+    # puts "Session State: #{session['omniauth.state']}"
+    redirect_to root_path, alert: 'Authentication failed'
   end
 
   # protected

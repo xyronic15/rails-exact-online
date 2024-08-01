@@ -276,7 +276,18 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-  config.omniauth :exact_online, ENV['EO_CLIENT_ID'], ENV['EO_CLIENT_SECRET'], setup: true, :strategy_class => OmniAuth::Strategies::ExactOnline
+  # config.omniauth :exact_online, ENV['EO_CLIENT_ID'], ENV['EO_CLIENT_SECRET'], setup: true, :strategy_class => OmniAuth::Strategies::ExactOnline, redirect_uri: ENV['EO_REDIRECT_URI']
+  config.omniauth :exact_online, ENV['EO_CLIENT_ID'], ENV['EO_CLIENT_SECRET'], {
+    client_options: {
+      site: 'https://start.exactonline.nl',
+      authorize_url: 'https://start.exactonline.nl/api/oauth2/auth',
+      token_url: 'https://start.exactonline.nl/api/oauth2/token'
+    },
+    provider_ignores_state: true,
+    setup: true,
+    strategy_class: OmniAuth::Strategies::ExactOnline,
+    redirect_uri: ENV['EO_REDIRECT_URI']
+  }
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
