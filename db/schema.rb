@@ -10,9 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_30_030711) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_01_023830) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "integrations", force: :cascade do |t|
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
+    t.bigint "user_id"
+    t.integer "integration_type"
+    t.string "uid"
+    t.string "name"
+    t.string "email"
+    t.string "language"
+    t.string "org_id"
+    t.string "locale"
+    t.string "timezone"
+    t.string "oauth_token"
+    t.string "refresh_token"
+    t.integer "expires_at"
+    t.string "instance_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_integrations_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
