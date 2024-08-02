@@ -14,7 +14,7 @@ class User < ApplicationRecord
       integration.name = auth.info.name
       integration.email = auth.info.email
       integration.language = auth.extra.language
-      integration.org_id = ''
+      integration.org_id = auth.info.division
       integration.locale = ''
       integration.timezone = ''
       integration.oauth_token = auth.credentials.token

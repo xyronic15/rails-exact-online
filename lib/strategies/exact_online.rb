@@ -24,7 +24,8 @@ module OmniAuth
           first_name: raw_info['feed']['entry']['content']['properties']['first_name'],
           last_name: raw_info['feed']['entry']['content']['properties']['last_name'],
           image: raw_info['feed']['entry']['content']['properties']['picture_url'],
-          phone: raw_info['feed']['entry']['content']['properties']['phone']
+          phone: raw_info['feed']['entry']['content']['properties']['phone'],
+          division: raw_info['feed']['entry']['content']['properties']['current_division']['_content_']
         }
       end
 
