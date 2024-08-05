@@ -15,7 +15,7 @@ module OmniAuth
       # option :pkce, true
 
       # TBC the following items
-      uid { raw_info['feed']['entry']['id'] }
+      uid { raw_info['feed']['entry']['content']['properties']['user_id']['_content_'] }
 
       info do
         {
