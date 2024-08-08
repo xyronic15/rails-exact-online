@@ -75,3 +75,7 @@ gem "omniauth-oauth2", "~> 1.8"
 gem "dotenv-rails", "~> 3.1"
 
 gem "omniauth-rails_csrf_protection", "~> 1.0"
+
+gem "faraday", "~> 2.10"
+
+gem "json", "~> 2.7"

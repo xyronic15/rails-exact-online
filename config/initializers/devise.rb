@@ -9,8 +9,8 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 
-# require 'strategies/exact_online'
-require Rails.root.join('lib', 'strategies', 'exact_online')
+require 'omniauth/strategies/exact_online'
+# require Rails.root.join('lib', 'strategies', 'exact_online')
 
 Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
@@ -285,7 +285,7 @@ Devise.setup do |config|
     },
     provider_ignores_state: true,
     setup: true,
-    strategy_class: OmniAuth::Strategies::ExactOnline,
+    # strategy_class: OmniAuth::Strategies::ExactOnline,
     redirect_uri: ENV['EO_REDIRECT_URI']
   }
 
