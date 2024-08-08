@@ -20,28 +20,28 @@ module ExactOnline
 
     def get(path, params = {})
       response = connection.get(path, params)
-      handle_response(response)
+      handle_response(response, response.status)
     rescue Faraday::Error => e
       handle_error(e)
     end
 
     def post(path, data = {})
       response = connection.post(path, data.to_json)
-      handle_response(response)
+      handle_response(response, response.status)
     rescue Faraday::Error => e
       handle_error(e)
     end
 
     def put(path, data = {})
       response = connection.put(path, data.to_json)
-      handle_response(response)
+      handle_response(response, response.status)
     rescue Faraday::Error => e
       handle_error(e)
     end
 
     def delete(path)
       response = connection.delete(path)
-      handle_response(response)
+      handle_response(response, response.status)
     rescue Faraday::Error => e
       handle_error(e)
     end
@@ -63,12 +63,13 @@ module ExactOnline
       end
     end
 
-    def handle_response(response)
+    def handle_response(response, status)
       {
         access_token: @access_token,
         refresh_token: @refresh_token,
         token_refreshed: @token_refreshed,
         refresh_expired: @refresh_expired,
+        status: status,
         response_data: response
       }.tap do
         @token_refreshed = false
@@ -83,14 +84,12 @@ module ExactOnline
         return refresh_response unless @token_refreshed
         puts "Retrying request..."
         reponse = retry_request(e.response)
-        # handle_response(reponse)
       else
-        handle_response(e.response)
+        handle_response(e.response, e.response[:status])
       end
     end
 
     def refresh_token!
-      # while @refresh_attempts < 5
       conn = Faraday.new(url: @instance_url) do |builder|
         builder.request :url_encoded
         builder.response :json, content_type: /\bjson$/
@@ -105,10 +104,7 @@ module ExactOnline
         client_secret: @client_secret
       })
 
-      # puts response.inspect
-
       if response.success?
-        # puts "response: #{response.inspect}"
         data = response.body
         puts "data: #{data}"
         @access_token = data['access_token']
@@ -118,12 +114,7 @@ module ExactOnline
         puts "Token refreshed #{@token_refreshed}"
         @refresh_attempts = 0
         return
-      # else
-      #   # @refresh_attempts += 1
-      #   # puts "Status: #{response}"
-      #   raise Faraday::Error.new response
       end
-      # end
 
       rescue Faraday::Error => e
         @refresh_attempts += 1
@@ -131,21 +122,20 @@ module ExactOnline
         @refresh_expired = true
         puts "Error: #{e.message}"
         puts "Body: #{e.response}"
-        handle_response(e.response)
+        handle_response(e.response, e.response[:status])
     end
 
     def retry_request(error)
       response = connection.send(error[:request][:method], error[:request][:url_path]) do |request|
-        # request.headers = error[:request][:headers]
         request.body = error[:request][:body]
         request.params = error[:request][:params]
       end
 
-      handle_response(response)
+      handle_response(response, response.status)
     rescue Faraday::Error => e
       puts "Error: #{e.message}"
       puts "Body: #{e.response}"
-      handle_response(e.response)
+      handle_response(e.response, e.response[:status])
     end
     
   end
