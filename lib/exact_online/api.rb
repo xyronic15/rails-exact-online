@@ -126,9 +126,11 @@ module ExactOnline
     end
 
     def retry_request(error)
+      # puts "Retry Body: #{error[:request][:body].class}"
+      # puts "Retry Params: #{error[:request][:params].presence}"
       response = connection.send(error[:request][:method], error[:request][:url_path]) do |request|
         request.body = error[:request][:body]
-        request.params = error[:request][:params]
+        request.params = error[:request][:params] || {}
       end
 
       handle_response(response, response.status)

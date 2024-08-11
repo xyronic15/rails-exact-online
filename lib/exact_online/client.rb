@@ -57,8 +57,8 @@ module ExactOnline
     #   Description
     #   GLToClaimDescription
     #   GLToPay
-    def get_vat_codes
-      response = @api.get("/api/v1/#{@division}/vat/VATCodes?$select=ID,Account,AccountCode,AccountName,Code,Country,Description,GLToClaimDescription,GLToPay")
+    def get_vat_codes(filter)
+      response = @api.get("/api/v1/#{@division}/vat/VATCodes?#{filter}&$select=ID,Account,AccountCode,AccountName,Code,Country,Description,GLToClaimDescription,GLToPay")
     end
 
     # bulk CustomerItems retrieval
@@ -73,6 +73,21 @@ module ExactOnline
     #   Item
     def get_customer_items
       response = @api.get("/api/v1/#{@division}/logistics/CustomerItems?$select=Account,AccountCode,AccountName,Created,Creator,CreatorFullName,Division,Item")
+    end
+
+    # post a VAT code
+    def post_vat_code(data)
+      response = @api.post("/api/v1/#{@division}/vat/VATCodes", data)
+    end
+
+    # put a VAT code
+    def put_vat_code(guid, data)
+      response = @api.put("/api/v1/#{@division}/vat/VATCodes(guid'#{guid}')", data)
+    end
+
+    # delete a VAT code
+    def delete_vat_code(guid)
+      response = @api.delete("/api/v1/#{@division}/vat/VATCodes(guid'#{guid}')")
     end
 
     private
