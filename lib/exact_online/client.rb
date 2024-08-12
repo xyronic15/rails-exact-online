@@ -46,21 +46,6 @@ module ExactOnline
       response = @api.get("/api/v1/#{@division}/sync/Financial/GLAccounts?$select=Timestamp,AllowCostsInSales,AssimilatedVATBox,BalanceType,BelcotaxType,Code,Description,Division,ExcludeVATListing,ID,PrivatePercentage,Type,VATCode,VATDescription")
     end
 
-    # bulk VATCodes retrieval
-    # fields include:
-    #   ID
-    #   Account
-    #   AccountCode
-    #   AccountName
-    #   Code
-    #   Country
-    #   Description
-    #   GLToClaimDescription
-    #   GLToPay
-    def get_vat_codes(filter)
-      response = @api.get("/api/v1/#{@division}/vat/VATCodes?#{filter}&$select=ID,Account,AccountCode,AccountName,Code,Country,Description,GLToClaimDescription,GLToPay")
-    end
-
     # bulk CustomerItems retrieval
     # fields include:
     #   Account
@@ -73,6 +58,27 @@ module ExactOnline
     #   Item
     def get_customer_items
       response = @api.get("/api/v1/#{@division}/logistics/CustomerItems?$select=Account,AccountCode,AccountName,Created,Creator,CreatorFullName,Division,Item")
+    end
+
+    # bulk VATCodes retrieval
+    # fields include:
+    #   ID
+    #   Account
+    #   AccountCode
+    #   AccountName
+    #   Code
+    #   Country
+    #   Description
+    #   GLToClaimDescription
+    #   GLToPay
+    def get_all_vat_codes
+      response = @api.get("/api/v1/#{@division}/vat/VATCodes?$select=ID,Account,AccountCode,AccountName,Code,Country,Description,GLToClaimDescription,GLToPay")
+    end
+
+    # get a VAT code
+    def get_vat_code(guid)
+      filter = "$filter=ID eq guid'#{guid}'"
+      response = @api.get("/api/v1/#{@division}/vat/VATCodes?#{filter}&$select=ID,Account,AccountCode,AccountName,Code,Country,Description,GLToClaimDescription,GLToPay")
     end
 
     # post a VAT code
