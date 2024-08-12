@@ -81,3 +81,4 @@ gem "faraday", "~> 2.10"
 gem "json", "~> 2.7"
 
 gem "omniauth-exact_online", git: "git@github.com:xyronic15/omniauth-exact_online.git"
+gem "good_job", "~> 4.1"
