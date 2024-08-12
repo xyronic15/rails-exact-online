@@ -1,0 +1,1 @@
+require 'omniauth-exact_online'

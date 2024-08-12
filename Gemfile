@@ -79,3 +79,5 @@ gem "omniauth-rails_csrf_protection", "~> 1.0"
 gem "faraday", "~> 2.10"
 
 gem "json", "~> 2.7"
+
+gem "omniauth-exact_online", git: "git@github.com:xyronic15/omniauth-exact_online.git"

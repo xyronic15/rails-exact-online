@@ -1,3 +1,11 @@
+GIT
+  remote: git@github.com:xyronic15/omniauth-exact_online.git
+  revision: 2f8b55d46ea567434aa1314ce64074103e19ef55
+  specs:
+    omniauth-exact_online (0.1.0)
+      omniauth (~> 2.1)
+      omniauth-oauth2 (~> 1.8)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -323,6 +331,7 @@ DEPENDENCIES
   jbuilder
   json (~> 2.7)
   omniauth (~> 2.1)
+  omniauth-exact_online!
   omniauth-oauth2 (~> 1.8)
   omniauth-rails_csrf_protection (~> 1.0)
   pg (~> 1.1)

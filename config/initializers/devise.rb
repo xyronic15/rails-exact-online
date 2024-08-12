@@ -9,7 +9,8 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 
-require 'omniauth/strategies/exact_online'
+# require 'omniauth/strategies/exact_online'
+require 'omniauth-exact_online'
 # require Rails.root.join('lib', 'strategies', 'exact_online')
 
 Devise.setup do |config|
