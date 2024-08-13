@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  guid: MyString
+  gl_to_pay: MyString
+  description: MyString
+  code: MyString
+  account_code: MyString
+  account: MyString
+
+two:
+  guid: MyString
+  gl_to_pay: MyString
+  description: MyString
+  code: MyString
+  account_code: MyString
+  account: MyString

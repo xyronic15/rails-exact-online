@@ -8,4 +8,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "home#index"
+
+  devise_scope :user do
+    resources :vat_codes
+    get 'vat_codes/poll', to: 'vat_codes#poll', as: 'vat_codes_poll'
+  end
 end

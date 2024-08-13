@@ -1,0 +1,47 @@
+<%= form_with(model: vat_code) do |form| %>
+  <% if vat_code.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(vat_code.errors.count, "error") %> prohibited this vat_code from being saved:</h2>
+
+      <ul>
+        <% vat_code.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :guid, style: "display: block" %>
+    <%= form.text_field :guid %>
+  </div>
+
+  <div>
+    <%= form.label :gl_to_pay, style: "display: block" %>
+    <%= form.text_field :gl_to_pay %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div>
+    <%= form.label :code, style: "display: block" %>
+    <%= form.text_field :code %>
+  </div>
+
+  <div>
+    <%= form.label :account_code, style: "display: block" %>
+    <%= form.text_field :account_code %>
+  </div>
+
+  <div>
+    <%= form.label :account, style: "display: block" %>
+    <%= form.text_field :account %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

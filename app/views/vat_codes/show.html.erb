@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @vat_code %>
+
+<div>
+  <%= link_to "Edit this vat code", edit_vat_code_path(@vat_code) %> |
+  <%= link_to "Back to vat codes", vat_codes_path %>
+
+  <%= button_to "Destroy this vat code", @vat_code, method: :delete %>
+</div>

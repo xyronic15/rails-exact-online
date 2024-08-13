@@ -1,0 +1,18 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Vat codes</h1>
+
+<div id="vat_codes">
+  <% @vat_codes.each do |vat_code| %>
+    <%= render vat_code %>
+    <p>
+      <%= link_to "Show this vat code", vat_code %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to vat_codes_poll_path() do %>
+  <p type="button">Refresh</p>
+<% end %>
+
+<%= link_to "New vat code", new_vat_code_path %>
